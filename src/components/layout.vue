@@ -5,11 +5,14 @@
               <img src="../assets/logo.png" alt="Logo">
               <div class="head-nav">
                   <ul class="nav-list">
-                      <li>登录</li>
-                      <li class="nav-pile"> | </li>
-                      <li>注册</li>
-                      <li class="nav-pile"> | </li>
-                      <li>关于</li>
+                    <li> {{ username }}</li>
+                    <li v-if="username!== ''" class="nav-pile">|</li>
+                    <li v-if="username!== ''">退出</li>
+                    <li v-if="username=== ''" @click="logClick">登录</li>
+                    <li class="nav-pile">|</li>
+                    <li v-if="username=== ''" @click="regClick">注册</li>
+                    <li v-if="username=== ''" class="nav-pile">|</li>
+                    <li @click="aboutClick">关于</li>
                   </ul>
               </div>
           </div>
@@ -22,10 +25,58 @@
       <div class="app-foot">
           <p>&copy; 2017 bkr MIT 版权所有</p>
       </div>
+      <my-dialog :is-show="isShowLogDialog" @on-close="closeDialog('isShowLogDialog')">
+        <log-form @has-log="onSuccessLog"></log-form>
+      </my-dialog>
+      <my-dialog :is-show="isShowRegDialog" @on-close="closeDialog('isShowRegDialog')">
+        <reg-form></reg-form>
+      </my-dialog>
+      <my-dialog :is-show="isShowAboutDialog" @on-close="closeDialog('isShowAboutDialog')">
+        <h2>【Vue.js】 一种渐进式 JavaScript 框架</h2>
+        <h3>特点是</h3>
+        <p>1.<strong>数据绑定</strong>:比如你改变一个输入框 Input 标签的值，会自动同步更新到页面上其他绑定该输入框的组件的值</p>
+        <p>2.<strong>组件化</strong>:页面上小到一个按钮都可以是一个单独的文件.vue，这些小组件直接可以像乐高积木一样通过互相引用而组装起来</p>
+      </my-dialog>
   </div>
 </template>
 <script>
-    
+    import Dialog from './dialog'
+    import LogForm from './logForm'
+    import RegForm from './regForm'
+    export default {
+      components: {
+        MyDialog: Dialog,
+        LogForm,
+        RegForm
+      },
+      data () {
+        return {
+          isShowLogDialog: false,
+          isShowRegDialog: false,
+          isShowAboutDialog: false,
+          username: ''
+        }
+      },
+      methods: {
+        logClick () {
+          this.isShowLogDialog = true
+        },
+        regClick () {
+          this.isShowRegDialog = true
+        },
+        aboutClick () {
+          this.isShowAboutDialog = true
+        },
+        closeDialog (attr) {
+          this[attr] = false
+        },    
+        onSuccessLog (data) {
+          console.log(data)
+          this.closeDialog ('isShowLogDialog')
+          this.username = data.username
+        }
+      }
+    }
 </script>
 <style>
 html, body, div, span, applet, object, iframe,
