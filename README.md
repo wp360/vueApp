@@ -282,7 +282,8 @@ Renders the element or template block multiple times based on the source data`
 更改vetur配置            vscode->首选项->设置->搜索（vetur）
 ```js
 "vetur.validation.template": true,
-改成：false
+改成：
+"vetur.validation.template": false,
 ```
 参考文章：
 
@@ -290,6 +291,6 @@ Renders the element or template block multiple times based on the source data`
 
 2. http://www.jianshu.com/p/5ba253651c3b
 
-[es6的export语法问题](https://segmentfault.com/q/1010000005918462)
+3. [es6的export语法问题](https://segmentfault.com/q/1010000005918462)
 
-[Vue2.0 新手完全填坑攻略——从环境搭建到发布](http://www.jianshu.com/p/5ba253651c3b)
+4. [Vue2.0 新手完全填坑攻略——从环境搭建到发布](http://www.jianshu.com/p/5ba253651c3b)
