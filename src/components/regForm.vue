@@ -1,6 +1,8 @@
 <template>
   <div class="login-form">
     <div class="g-form">
+      <p>开发中...</p>
+      <!--
       <div class="g-form-line" v-for="formLine in formData">
         <span class="g-form-label">{{ formLine.label }}：</span>
         <div class="g-form-input">
@@ -13,6 +15,7 @@
           <a class="button" @click="onLogin">登录</a>
         </div>
       </div>
+      -->
     </div>
   </div>
 </template>

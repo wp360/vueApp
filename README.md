@@ -272,6 +272,42 @@ fs.readFile('./文件', function(err, data) {
   </transition>
 </a>
 ```
+## keep-alive指令
+说明：比如有一个列表和一个详情，那么用户就会经常
+
+打开详情=>返回列表=>打开详情…
+
+这样的话列表和详情都是一个频率很高的页面，那么就可以对列表进行缓存，这样用户每次返回列表的时候，都能从缓存中快速渲染，而不是重新渲染
+
+[官网API链接](https://cn.vuejs.org/v2/api/#keep-alive)
+
+## 图片绑定
+```html
+<!--<img src="../assets/images/1.png">-->
+<!--<img :src="imgMap[$route.path]">-->
+<img :src="productIcon">
+```
+```js
+  data() {
+    return {
+      products: [
+        ...省略
+      ],
+      // 图片映射地址
+      imgMap: {
+        "/detail/count": require("../assets/images/1.png"),
+        "/detail/forecast": require("../assets/images/2.png"),
+        "/detail/analysis": require("../assets/images/3.png"),
+        "/detail/publish": require("../assets/images/4.png")
+      }
+    }
+  },
+  computed: {
+    productIcon() {
+      return this.imgMap[this.$route.path];
+    }
+  }
+```
 
 ## 备注
 ### 错误提示:
@@ -284,6 +320,16 @@ Renders the element or template block multiple times based on the source data`
 "vetur.validation.template": true,
 改成：
 "vetur.validation.template": false,
+```
+```html
+此外，参考：https://vuejs.org/v2/guide/list.html#key
+<div v-for="item in items" :key="item.id">
+  <!-- content -->
+</div>
+例如，detail.vue >>>
+<router-link v-for="item in products" :key="item.id" :to="{ path: item.path }" tag="li" active-class="active">
+    {{ item.name }}
+</router-link>
 ```
 参考文章：
 
